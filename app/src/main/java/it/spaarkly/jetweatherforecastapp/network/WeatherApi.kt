@@ -1,6 +1,6 @@
 package it.spaarkly.jetweatherforecastapp.network
 
-import it.spaarkly.jetweatherforecastapp.model.WeatherItem
+import it.spaarkly.jetweatherforecastapp.model.Weather
 import it.spaarkly.jetweatherforecastapp.util.Constants
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -14,6 +14,6 @@ interface WeatherApi {
         @Query("q") query : String,
         @Query("units") units : String = "metric",
         @Query("appid") appid : String = Constants.API_KEY,
-    ) : WeatherItem
+    ) : Weather
 
 }

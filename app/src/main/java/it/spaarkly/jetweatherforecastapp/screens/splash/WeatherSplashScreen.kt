@@ -42,7 +42,7 @@ fun WeatherSplashScreen(navController: NavController) {
                 OvershootInterpolator(8f).getInterpolation(it)
             },
         ))
-        delay(2000L)
+        delay(1000L)
         navController.navigate(WeatherScreens.MainScreen.name)
     })
 
