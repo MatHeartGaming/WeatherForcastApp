@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.dagger.hilt.android'
+    //Secret Gradle
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
@@ -94,5 +95,6 @@ dependencies {
 
     //Okhttp
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
+
 
 }
