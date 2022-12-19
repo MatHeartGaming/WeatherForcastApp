@@ -1,10 +1,10 @@
-package it.spaarkly.jetweatherforecastapp.screens
+package it.spaarkly.jetweatherforecastapp.screens.main
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 
 @Composable
-fun WeatherSplashScreen(navController: NavController) {
-    Text("Splash Screem")
+fun MainScreen(navController: NavController) {
+    Text("Main Screen")
 }
