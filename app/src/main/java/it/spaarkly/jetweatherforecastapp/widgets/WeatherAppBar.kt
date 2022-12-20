@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import it.spaarkly.jetweatherforecastapp.navigation.WeatherScreens
 
 @Composable
 fun WeatherAppBar(
@@ -101,6 +102,13 @@ fun ShowSettingDropDownMenu(showDialog: MutableState<Boolean>, navController: Na
             items.forEachIndexed { index, text ->
                 DropdownMenuItem(onClick = {
                     hideDialog(expanded = expanded, showDialog = showDialog)
+                    navController.navigate(
+                        when (text) {
+                            "About" -> WeatherScreens.AboutScreen.name
+                            "Favourites" -> WeatherScreens.FavouriteScreen.name
+                            else -> WeatherScreens.SettingsScreen.name
+                        }
+                    )
                 }) {
                     Icon(
                         imageVector = when (text) {
@@ -111,9 +119,7 @@ fun ShowSettingDropDownMenu(showDialog: MutableState<Boolean>, navController: Na
                         }, contentDescription = "",
                         tint = Color.LightGray
                     )
-                    Text(text, modifier = Modifier.clickable {
-                        hideDialog(expanded = expanded, showDialog = showDialog)
-                    }, fontWeight = FontWeight.W300)
+                    Text(text, fontWeight = FontWeight.W300)
                 }
             }
         }
