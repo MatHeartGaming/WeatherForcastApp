@@ -19,16 +19,21 @@ import androidx.navigation.NavController
 import it.spaarkly.jetweatherforecastapp.data.DataOrException
 import it.spaarkly.jetweatherforecastapp.model.Weather
 import it.spaarkly.jetweatherforecastapp.model.WeatherItem
+import it.spaarkly.jetweatherforecastapp.navigation.WeatherScreens
 import it.spaarkly.jetweatherforecastapp.util.formatDate
 import it.spaarkly.jetweatherforecastapp.util.formatDecimals
 import it.spaarkly.jetweatherforecastapp.widgets.*
 
 @Composable
-fun MainScreen(navController: NavController, mainViewModel: MainViewModel = hiltViewModel()) {
+fun MainScreen(
+    navController: NavController,
+    mainViewModel: MainViewModel = hiltViewModel(),
+    city: String = "Matera"
+) {
     val weatherData = produceState<DataOrException<Weather, Boolean, Exception>>(
         initialValue = DataOrException(loading = true)
     ) {
-        value = mainViewModel.getWeatherData(city = "Montescaglioso")
+        value = mainViewModel.getWeatherData(city = city)
     }.value
 
     if (weatherData.loading == true) {
@@ -46,6 +51,9 @@ fun MainScaffold(weather: Weather, navController: NavController) {
             title = "${weather.city.name} , ${weather.city.country}",
             navController = navController,
             elevation = 5.dp,
+            onAddActionClick = {
+                navController.navigate(WeatherScreens.SearchScreen.name)
+            },
         )
     }) {
         it

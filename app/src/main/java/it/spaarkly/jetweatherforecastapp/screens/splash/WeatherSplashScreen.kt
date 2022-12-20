@@ -34,6 +34,7 @@ fun WeatherSplashScreen(navController: NavController) {
     val scale = remember{
         Animatable(0f)
     }
+    val defaultCity = "Matera"
 
     LaunchedEffect(key1 = true, block = {
         scale.animateTo(targetValue = 0.9f, animationSpec = tween(
@@ -43,7 +44,11 @@ fun WeatherSplashScreen(navController: NavController) {
             },
         ))
         delay(1000L)
-        navController.navigate(WeatherScreens.MainScreen.name)
+        navController.navigate(WeatherScreens.MainScreen.name + "/$defaultCity") {
+            popUpTo(WeatherScreens.SplashScreen.name) {
+                inclusive = true
+            }
+        }
     })
 
     Surface(modifier = Modifier
