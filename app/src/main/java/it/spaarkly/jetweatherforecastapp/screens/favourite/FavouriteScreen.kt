@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import it.spaarkly.jetweatherforecastapp.model.Favourite
+import it.spaarkly.jetweatherforecastapp.navigation.WeatherScreens
 import it.spaarkly.jetweatherforecastapp.widgets.WeatherAppBar
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -143,7 +144,7 @@ fun CityRow(
             .fillMaxWidth()
             .height(50.dp)
             .clickable {
-
+                navController.navigate(WeatherScreens.MainScreen.name + "/${favourite.city}")
             },
         shape = CircleShape.copy(topEnd = CornerSize(6.dp)), color = Color(0xffB2DFDB)
     ) {

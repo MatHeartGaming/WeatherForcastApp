@@ -1,11 +1,6 @@
 package it.spaarkly.jetweatherforecastapp.data
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import it.spaarkly.jetweatherforecastapp.model.Favourite
 import kotlinx.coroutines.flow.Flow
 
@@ -29,5 +24,17 @@ interface WeatherDao {
 
     @Delete
     suspend fun deleteFavourite(favourite: Favourite)
+
+    @Query("SELECT * FROM settings_tbl")
+    fun getUnits() : Flow<List<it.spaarkly.jetweatherforecastapp.model.Unit>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertUnit(unit: it.spaarkly.jetweatherforecastapp.model.Unit)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateUnit(unit: it.spaarkly.jetweatherforecastapp.model.Unit)
+
+    @Delete
+    suspend fun deleteUnit(unit: it.spaarkly.jetweatherforecastapp.model.Unit)
 
 }
