@@ -37,4 +37,7 @@ interface WeatherDao {
     @Delete
     suspend fun deleteUnit(unit: it.spaarkly.jetweatherforecastapp.model.Unit)
 
+    @Query("DELETE FROM settings_tbl")
+    suspend fun deleteAllUnits()
+
 }

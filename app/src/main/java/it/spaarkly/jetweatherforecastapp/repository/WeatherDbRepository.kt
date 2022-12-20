@@ -27,4 +27,6 @@ class WeatherDbRepository @Inject constructor(private val weatherDao: WeatherDao
 
     suspend fun deleteUnit(unit: it.spaarkly.jetweatherforecastapp.model.Unit) = weatherDao.deleteUnit(unit)
 
+    suspend fun deleteAllUnits() = weatherDao.deleteAllUnits()
+
 }
