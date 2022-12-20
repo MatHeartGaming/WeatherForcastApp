@@ -9,14 +9,24 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import it.spaarkly.jetweatherforecastapp.R
+import it.spaarkly.jetweatherforecastapp.model.Favourite
 import it.spaarkly.jetweatherforecastapp.navigation.WeatherScreens
+import it.spaarkly.jetweatherforecastapp.screens.favourite.FavouriteViewModel
 
 @Composable
 fun WeatherAppBar(
@@ -25,6 +35,7 @@ fun WeatherAppBar(
     isMainScreen: Boolean = true,
     elevation: Dp = 0.dp,
     navController: NavController,
+    favouriteViewModel: FavouriteViewModel = hiltViewModel(),
     onAddActionClick: () -> Unit = {},
     onButtonClicked: () -> Unit = {},
 ) {
@@ -72,6 +83,19 @@ fun WeatherAppBar(
                     modifier = Modifier.clickable {
                         onButtonClicked()
                     })
+            }
+
+            if(isMainScreen) {
+
+                Icon(imageVector = Icons.Default.FavoriteBorder,
+                    contentDescription = "",
+                modifier = Modifier.scale(0.9f)
+                    .clickable {
+                        val splittedTitle = title.split(",")
+                        val fav = Favourite(city = splittedTitle[0], country = splittedTitle[1])
+                        favouriteViewModel.insertFavourite(favourite = fav)
+                },
+                tint = Color.Red.copy(alpha = 0.6f))
             }
         },
         backgroundColor = MaterialTheme.colors.primaryVariant,
